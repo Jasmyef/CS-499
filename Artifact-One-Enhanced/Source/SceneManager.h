@@ -43,6 +43,26 @@ public:
 		std::string tag;
 	};
 
+	// Enhancement Software Design and Engineering
+	struct SceneObject
+	{
+		std::string meshType;      // "plane", "box", "cylinder", or "torus"
+		glm::vec3 scale;
+		float rotationX;
+		float rotationY;
+		float rotationZ;
+		glm::vec3 position;
+		bool useTexture;           // true = apply a texture, false = apply a solid color
+		std::string textureTag;    // used when useTexture is true
+		std::string materialTag;   
+		float uvScaleU;
+		float uvScaleV;
+		float colorR;
+		float colorG;
+		float colorB;
+		float colorA;
+	};
+
 private:
 	// pointer to shader manager object
 	ShaderManager* m_pShaderManager;
@@ -54,6 +74,8 @@ private:
 	TEXTURE_INFO m_textureIDs[16];
 	// defined object materials
 	std::vector<OBJECT_MATERIAL> m_objectMaterials;
+	// objects loaded from the scene configuration file
+	std::vector<SceneObject> m_sceneObjects;
 
 	// load texture images and convert to OpenGL texture data
 	bool CreateGLTexture(const char* filename, std::string tag);
@@ -104,5 +126,10 @@ public:
 	void DefineObjectMaterials();
 	void SetupSceneLights();
 	void RenderScene();
+
+private:
+	// Enhancement Software Design and Engineering):
+	void LoadSceneObjects(std::string filename);
+	void DrawSceneObject(const SceneObject& object);
 
 };
