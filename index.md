@@ -19,3 +19,10 @@ This will showcase how I can take ordinary code and enhance it to be better orga
 - [Original Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact-One-Original)
 - [Enhanced Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact-One-Enhanced)
 - [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-One-Narrative)
+
+**2. Algorithms and Data Structures** <br>
+
+#### Here, I took a contact service program I created in CS 32, built in Java, and enhanced it by updating the contact lookup process. 
+- [Original Code]
+- [Enhanced Code](https://github.com/Jasmyef/CS-499/tree/main/CS499%204-2%20Enchanced)
+- [Narrative]
