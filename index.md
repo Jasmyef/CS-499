@@ -18,4 +18,4 @@ This will showcase how I can take ordinary code and enhance it to be better orga
 #### Here, I took a 3D scene that was created in CS 330, built in C++, and enhanced how the scene was built. I created one file that the program reads and can update easily, rather than having to change it directly in code that was repeated seven times.
 - [Original Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact-One-Original)
 - [Enhanced Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact-One-Enhanced)
-- 
+- [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-One-Narrative)
