@@ -18,18 +18,18 @@ This will showcase how I can take ordinary code and enhance it to be better orga
 #### Here, I took a 3D scene that was created in CS 330, built in C++, and enhanced how the scene was built.
 - [Original Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact-One-Original)
 - [Enhanced Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact-One-Enhanced)
-- [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-One-Narrative)
+- [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-One-Narrative.md)
 
 **2. Algorithms and Data Structures** <br>
 
 #### Here, I took a contact service program I created in CS 320, built in Java, and enhanced it by updating the contact lookup process. 
 - [Original Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact%20Two-Orginial)
 - [Enhanced Code](https://github.com/Jasmyef/CS-499/tree/main/CS499%204-2%20Enchanced)
-- [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-Two-Narrative)
+- [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-Two-Narrative.md)
 
 **3. Databases** <br>
 
 #### Here, I took a contact service program I created in CS 320, built in Java, and enhanced it by making sure contacts are saved. 
 - [Original Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact%20Two-Orginial)
 - [Enhanced Code](https://github.com/Jasmyef/CS-499/tree/main/CS499%204-2%20Enchanced)
-- [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-Three-Narrative)
+- [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-Three-Narrative.md)
