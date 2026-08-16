@@ -16,6 +16,10 @@
 
 #include <glm/gtx/transform.hpp>
 
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
 // declaration of global variables
 namespace
 {
@@ -460,115 +464,132 @@ void SceneManager::PrepareScene()
  ***********************************************************/
 void SceneManager::RenderScene()
 {
-	glm::vec3 scaleXYZ;
-	float XrotationDegrees = 0.0f;
-	float YrotationDegrees = 0.0f;
-	float ZrotationDegrees = 0.0f;
-	glm::vec3 positionXYZ;
+	// Enhancement (Software Design and Engineering):
+	if (m_sceneObjects.empty())
+	{
+		LoadSceneObjects("scene_config.txt");
+	}
 
-	//plane
-	scaleXYZ = glm::vec3(20.0f, 1.0f, 10.0f);
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-	positionXYZ = glm::vec3(0.0f, -0.01f, 0.0f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderTexture("wood");
-	SetShaderMaterial("wood");
-	SetTextureUVScale(1.0f, 1.0f);
-	m_basicMeshes->DrawPlaneMesh();
+	for (const SceneObject& object : m_sceneObjects)
+	{
+		DrawSceneObject(object);
+	}
+}
 
-	// monitor box
-	scaleXYZ = glm::vec3(2.0f, 3.0f, 1.0f);
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-	positionXYZ = glm::vec3(2.0f, 1.5f, -2.0f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderTexture("brick");
-	SetShaderMaterial("brick");
-	SetTextureUVScale(2.0f, 2.0f);
-	m_basicMeshes->DrawBoxMesh();
+/***********************************************************
+ *  LoadSceneObjects()
+ *
+ *  Reads the scene layout from a text file into m_sceneObjects.
+ *  Each non-comment line describes one object using this format:
+ *
+ *  meshType,scaleX,scaleY,scaleZ,rotX,rotY,rotZ,posX,posY,posZ,mode,texture,material,uvU,uvV,r,g,b,a
+ *
+ *  mode is either TEXTURE (uses texture/material/uvU/uvV) or COLOR (uses r,g,b,a).
+ *  Lines starting with # are comments and are skipped.
+ ***********************************************************/
+void SceneManager::LoadSceneObjects(std::string filename)
+{
+	std::ifstream file(filename);
+	if (!file.is_open())
+	{
+		std::cout << "WARNING: could not open scene config file: " << filename << std::endl;
+		return;
+	}
 
-	// antenna
-	scaleXYZ = glm::vec3(0.3f, 1.5f, 0.3f);
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-	positionXYZ = glm::vec3(2.6f, 2.2f, -2.0f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderTexture("wood");
-	SetShaderMaterial("wood");
-	SetTextureUVScale(1.0f, 2.0f);
-	m_basicMeshes->DrawCylinderMesh();
+	std::string line;
+	while (std::getline(file, line))
+	{
+		if (line.empty() || line[0] == '#')
+		{
+			continue;
+		}
 
-	//frame
-	scaleXYZ = glm::vec3(2.0f, 2.5f, 0.2f);
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-	positionXYZ = glm::vec3(-6.0f, 1.25f, -1.0f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderColor(1.0f, 1.0f, 1.0f, 1.0f); 
-	m_basicMeshes->DrawBoxMesh();
+		std::stringstream lineStream(line);
+		std::string field;
+		std::vector<std::string> fields;
 
-	//picture inside
-	scaleXYZ = glm::vec3(0.7f, 1.0f, 1.0f);
-	XrotationDegrees = 90.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-	positionXYZ = glm::vec3(-6.0f, 1.25f, -0.85f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderColor(0.9f, 0.9f, 0.85f, 1.0f);
-	m_basicMeshes->DrawPlaneMesh();
+		while (std::getline(lineStream, field, ','))
+		{
+			fields.push_back(field);
+		}
 
-	//mug
-	scaleXYZ = glm::vec3(0.7f, 1.0f, 0.7f);
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-	positionXYZ = glm::vec3(-2.5f, 0.0f, -1.0f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderColor(0.9f, 0.4f, 0.6f, 1.0f); 
-	m_basicMeshes->DrawCylinderMesh();
+		if (fields.size() < 19)
+		{
+			std::cout << "WARNING: skipping malformed scene line: " << line << std::endl;
+			continue;
+		}
 
-	//handle
-	scaleXYZ = glm::vec3(0.3f, 0.7, 0.15f);
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 90.0f;
-	positionXYZ = glm::vec3(-1.7f, 0.5f, -1.0f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderColor(0.9f, 0.4f, 0.6f, 1.0f);
-	m_basicMeshes->DrawTorusMesh();
-	
+		SceneObject object;
+		object.meshType = fields[0];
+		object.scale = glm::vec3(std::stof(fields[1]), std::stof(fields[2]), std::stof(fields[3]));
+		object.rotationX = std::stof(fields[4]);
+		object.rotationY = std::stof(fields[5]);
+		object.rotationZ = std::stof(fields[6]);
+		object.position = glm::vec3(std::stof(fields[7]), std::stof(fields[8]), std::stof(fields[9]));
+		object.useTexture = (fields[10] == "TEXTURE");
+		object.textureTag = fields[11];
+		object.materialTag = fields[12];
+		object.uvScaleU = std::stof(fields[13]);
+		object.uvScaleV = std::stof(fields[14]);
+		object.colorR = std::stof(fields[15]);
+		object.colorG = std::stof(fields[16]);
+		object.colorB = std::stof(fields[17]);
+		object.colorA = std::stof(fields[18]);
 
-	//candle
-	scaleXYZ = glm::vec3(0.8f, 1.2f, 0.8f);
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-	positionXYZ = glm::vec3(4.5f, 0.0f, -1.0f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderColor(0.95f, 0.9f, 0.7f, 1.0f); 
-	m_basicMeshes->DrawCylinderMesh();
+		m_sceneObjects.push_back(object);
+	}
 
-	//flame
-	scaleXYZ = glm::vec3(0.15f, 0.6f, 0.15f);
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-	positionXYZ = glm::vec3(4.5f, 1.2f, -1.0f);
-	SetTransformations(scaleXYZ, XrotationDegrees, YrotationDegrees,
-		ZrotationDegrees, positionXYZ);
-	SetShaderColor(1.0f, 0.0f, 0.0f, 1.0f);
-	m_basicMeshes->DrawCylinderMesh();
+	file.close();
+}
+
+/***********************************************************
+ *  DrawSceneObject()
+ *
+ *  Applies one object's transform, texture or color, and draws
+ *  its mesh. This is the one place that used to be copy-pasted
+ *  once per object inside RenderScene().
+ ***********************************************************/
+void SceneManager::DrawSceneObject(const SceneObject& object)
+{
+	SetTransformations(
+		object.scale,
+		object.rotationX,
+		object.rotationY,
+		object.rotationZ,
+		object.position);
+
+	if (object.useTexture)
+	{
+		SetShaderTexture(object.textureTag);
+		if (!object.materialTag.empty())
+		{
+			SetShaderMaterial(object.materialTag);
+		}
+		SetTextureUVScale(object.uvScaleU, object.uvScaleV);
+	}
+	else
+	{
+		SetShaderColor(object.colorR, object.colorG, object.colorB, object.colorA);
+	}
+
+	if (object.meshType == "plane")
+	{
+		m_basicMeshes->DrawPlaneMesh();
+	}
+	else if (object.meshType == "box")
+	{
+		m_basicMeshes->DrawBoxMesh();
+	}
+	else if (object.meshType == "cylinder")
+	{
+		m_basicMeshes->DrawCylinderMesh();
+	}
+	else if (object.meshType == "torus")
+	{
+		m_basicMeshes->DrawTorusMesh();
+	}
+	else
+	{
+		std::cout << "WARNING: unknown mesh type in scene config: " << object.meshType << std::endl;
+	}
 }
