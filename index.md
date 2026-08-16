@@ -3,7 +3,7 @@ Computer Science Capstone <br>
 
 This will showcase how I can take ordinary code and enhance it to be better organized and more efficient. This will include everything from beginning to end, which is the code review, the artifacts for the assignment, and the professional self-assessment.
 
-## Here you can see: 
+# Here you can see: 
 - [Professional Self-Assessment](professional-self-assessment.md)<br>
 - [Code Review](CodeReview.mp4)
 
@@ -11,7 +11,7 @@ This will showcase how I can take ordinary code and enhance it to be better orga
   <source src="CodeReview.mp4" type="video/mp4">
 </video>
 
-## Artifacts 
+# Artifacts 
 
 **1. Software Design and Engineering** <br>
 
