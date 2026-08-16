@@ -7,6 +7,6 @@ This will showcase how I can take ordinary code and enhance it to be better orga
 - [Professional Self-Assessment](professional-self-assessment.md)<br>
 - [Code Review](CodeReview.mp4)
 
-<video controls width="600">
+<video controls width="300">
   <source src="CodeReview.mp4" type="video/mp4">
 </video>
