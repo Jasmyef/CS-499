@@ -30,6 +30,6 @@ This showcases how I can take ordinary code and enhance it to be better organize
 **3. Databases** <br>
 
 #### Here, I took a contact service program I created in CS 320, built in Java, and enhanced it by making sure contacts are saved. 
-- [Original Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact%20Two-Orginial)
+- [Original Code](https://github.com/Jasmyef/CS-499/tree/main/Artifact%20Two-Original)
 - [Enhanced Code](https://github.com/Jasmyef/CS-499/tree/main/CS499%204-2%20Enchanced)
 - [Narrative](https://github.com/Jasmyef/CS-499/blob/main/Artifact-Three-Narrative.md)
