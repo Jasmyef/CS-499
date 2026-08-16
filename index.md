@@ -11,7 +11,7 @@ This will showcase how I can take ordinary code and enhance it to be better orga
   <source src="CodeReview.mp4" type="video/mp4">
 </video>
 
-## Artifacts ##
+## Artifacts 
 **1. Software Design and Engineering** <br>
 
 Here, I took a 3D scene that was created in CS 330, built in C++, and enhanced how the scene was built. I created one file that the program reads and can update easily, rather than having to change it directly in code that was repeated seven times.
